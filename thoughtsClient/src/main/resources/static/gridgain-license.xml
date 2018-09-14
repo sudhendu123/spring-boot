@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gridgain-license version="2.1">
+    <id>ee16166c-3663-41d9-92a9-13bda0b28a41</id>
+    <issue-date>11/02/2018</issue-date>
+    <maintenance-time>0</maintenance-time>
+    <user-org>Kodiak Networks</user-org>
+    <license-note>Production License for KodiakPTT</license-note>
+    <user-www>http://kodiakptt.com</user-www>
+    <user-email>NHarisha@kodiakptt.com</user-email>
+    <user-name>Harish Negalaguli</user-name>
+    <type>OEM</type>
+    <expire-date>12/31/2018</expire-date>
+    <max-nodes>0</max-nodes>
+    <max-cpus>0</max-cpus>
+    <max-computers>25</max-computers>
+    <grace-period>86400</grace-period>
+    <max-uptime>0</max-uptime>
+    <signature>302C02140DD2FCCE8DFDB9A81CFD806C3BB872A952E22A080214376C51B14D85059422D571AAA288627FD3E0A009</signature>
+    <enabled-feature name="ultimate"/>
+</gridgain-license>

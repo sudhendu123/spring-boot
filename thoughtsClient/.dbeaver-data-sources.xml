@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="h2_embedded-165138e7191-6c04b3cc037cf084" provider="generic" driver="h2_embedded" name="H2 - test" save-password="true" show-system-objects="true" read-only="false">
+		<connection server="" database="tcp://localhost/~/testdb" url="jdbc:h2:tcp://localhost/~/testdb" user="sa" type="dev"/>
+	</data-source>
+	<filters/>
+</data-sources>

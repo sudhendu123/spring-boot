@@ -1,0 +1,845 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="/pocprov_V1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="InboundPocProv" targetNamespace="/pocprov_V1.0">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="/pocprov_V1.0" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="/pocprov_V1.0">
+  <xs:element name="changeMdn" type="tns:changeMdn"/>
+  <xs:element name="changeMdnResponse" type="tns:changeMdnResponse"/>
+  <xs:element name="changeServiceAuthStatus" type="tns:changeServiceAuthStatus"/>
+  <xs:element name="changeServiceAuthStatusResponse" type="tns:changeServiceAuthStatusResponse"/>
+  <xs:element name="createSubscriber" type="tns:createSubscriber"/>
+  <xs:element name="createSubscriberResponse" type="tns:createSubscriberResponse"/>
+  <xs:element name="deleteExternalSubscriber" type="tns:deleteExternalSubscriber"/>
+  <xs:element name="deleteExternalSubscriberResponse" type="tns:deleteExternalSubscriberResponse"/>
+  <xs:element name="deleteSubscriber" type="tns:deleteSubscriber"/>
+  <xs:element name="deleteSubscriberResponse" type="tns:deleteSubscriberResponse"/>
+  <xs:element name="forceSync" type="tns:forceSync"/>
+  <xs:element name="forceSyncResponse" type="tns:forceSyncResponse"/>
+  <xs:element name="getSubscriberDetails" type="tns:getSubscriberDetails"/>
+  <xs:element name="getSubscriberDetailsResponse" type="tns:getSubscriberDetailsResponse"/>
+  <xs:element name="getSubscriberInfo" type="tns:getSubscriberInfo"/>
+  <xs:element name="getSubscriberInfoResponse" type="tns:getSubscriberInfoResponse"/>
+  <xs:element name="getSysConfig" type="tns:getSysConfig"/>
+  <xs:element name="getSysConfigResponse" type="tns:getSysConfigResponse"/>
+  <xs:element name="initialize" type="tns:initialize"/>
+  <xs:element name="initializeResponse" type="tns:initializeResponse"/>
+  <xs:element name="isAlive" type="tns:isAlive"/>
+  <xs:element name="isAliveResponse" type="tns:isAliveResponse"/>
+  <xs:element name="updateAutoPairing" type="tns:updateAutoPairing"/>
+  <xs:element name="updateAutoPairingResponse" type="tns:updateAutoPairingResponse"/>
+  <xs:element name="updateSubscriber" type="tns:updateSubscriber"/>
+  <xs:element name="updateSubscriberResponse" type="tns:updateSubscriberResponse"/>
+  <xs:complexType name="deleteExternalSubscriber">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+      <xs:element minOccurs="0" name="mobileInfo" type="tns:mobileInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="authInfo">
+    <xs:sequence>
+      <xs:element name="clientInfo" type="tns:clientInfo"/>
+      <xs:element minOccurs="0" name="credentialInfo" type="tns:credentialInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="clientInfo">
+    <xs:sequence>
+      <xs:element name="clientType" type="xs:string"/>
+      <xs:element name="protocolVersion" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="credentialInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="userId" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="mobileInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="mdn" type="xs:string"/>
+      <xs:element minOccurs="0" name="imei" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="transactionInfo">
+    <xs:sequence>
+      <xs:element name="applicationId" type="xs:string"/>
+      <xs:element name="transactionId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteExternalSubscriberResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:statusInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="statusInfo">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="details" type="xs:string"/>
+      <xs:element name="statusCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="isAlive">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="isAliveResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:statusInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getSubscriberDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+      <xs:element minOccurs="0" name="mobileInfo" type="tns:mobileInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getSubscriberDetailsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:subsDetailsResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="subsDetailsResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:statusInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="subsProvisionInfo" type="tns:subsProvisionInfo"/>
+          <xs:element minOccurs="0" name="serverConfigInfo" type="tns:serverConfigInfo"/>
+          <xs:element minOccurs="0" name="subStatusInfo" type="tns:subStatusInfo"/>
+          <xs:element minOccurs="0" name="subsAddlInfo" type="tns:subsAddlInfo"/>
+          <xs:element minOccurs="0" name="featureBitInfo" type="tns:featureBitInfo"/>
+          <xs:element minOccurs="0" name="clientFSInfo" type="tns:featureBitInfo"/>
+          <xs:element minOccurs="0" name="corpAdminFSInfo" type="tns:featureBitInfo"/>
+          <xs:element minOccurs="0" name="customInfo" type="tns:customInfo"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="subsProvisionInfo">
+    <xs:sequence>
+      <xs:element name="mobileInfo" type="tns:mobileInfo"/>
+      <xs:element minOccurs="0" name="networkName" type="xs:string"/>
+      <xs:element minOccurs="0" name="accountId" type="xs:string"/>
+      <xs:element minOccurs="0" name="subscriptionType" type="xs:string"/>
+      <xs:element minOccurs="0" name="affiliateId" type="xs:string"/>
+      <xs:element minOccurs="0" name="payType" type="xs:string"/>
+      <xs:element minOccurs="0" name="roamingType" type="tns:roamingTypes"/>
+      <xs:element minOccurs="0" name="pairingInd" type="xs:string"/>
+      <xs:element minOccurs="0" name="eMailAddress" type="xs:string"/>
+      <xs:element minOccurs="0" name="subsClientType" type="xs:string"/>
+      <xs:element minOccurs="0" name="corporateName" type="xs:string"/>
+      <xs:element minOccurs="0" name="subscrFSInfo" type="tns:subscriberFSInfoList"/>
+      <xs:element minOccurs="0" name="ufmi" type="xs:string"/>
+      <xs:element minOccurs="0" name="iDenDetails" type="tns:subIdenDetails"/>
+      <xs:element minOccurs="0" name="addPackageInfo" type="tns:knPackageInfo"/>
+      <xs:element minOccurs="0" name="removePackageInfo" type="tns:knPackageInfo"/>
+      <xs:element minOccurs="0" name="licenseType" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="roamingTypes">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="subscriberFSInfoList">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="subscriberFSInfo" type="tns:featureBits"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="featureBits">
+    <xs:sequence>
+      <xs:element name="featureId" type="xs:string"/>
+      <xs:element name="enable" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="subIdenDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="userName" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+      <xs:element minOccurs="0" name="busUnitId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="knPackageInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="tierPkgId" type="xs:string"/>
+      <xs:element minOccurs="0" name="addOnPkgId" type="tns:knAddonPackageInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="knAddonPackageInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="serverConfigInfo">
+    <xs:sequence>
+      <xs:element name="poCServerName" type="xs:string"/>
+      <xs:element name="XDMServerName" type="xs:string"/>
+      <xs:element name="presenceServerName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="subStatusInfo">
+    <xs:sequence>
+      <xs:element name="poCStatus" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="subsAddlInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="dispatchGrpMember" type="xs:string"/>
+      <xs:element minOccurs="0" name="internalCorpID" type="xs:string"/>
+      <xs:element minOccurs="0" name="userAgent" type="xs:string"/>
+      <xs:element minOccurs="0" name="subsCreationTime" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastActivationTime" type="xs:string"/>
+      <xs:element minOccurs="0" name="billingMDN" type="xs:string"/>
+      <xs:element minOccurs="0" name="roamingAllowed" type="xs:string"/>
+      <xs:element minOccurs="0" name="userID" type="xs:string"/>
+      <xs:element minOccurs="0" name="vendorID" type="xs:string"/>
+      <xs:element minOccurs="0" name="dispatchType" type="xs:string"/>
+      <xs:element minOccurs="0" name="subsUserID" type="xs:string"/>
+      <xs:element minOccurs="0" name="aliasMdn" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="featureBitInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="instaPOC" type="xs:string"/>
+      <xs:element minOccurs="0" name="missedCallAlert" type="xs:string"/>
+      <xs:element minOccurs="0" name="callEndedAlert" type="xs:string"/>
+      <xs:element minOccurs="0" name="locationSubscription" type="xs:string"/>
+      <xs:element minOccurs="0" name="supervisoryOverride" type="xs:string"/>
+      <xs:element minOccurs="0" name="tuSms" type="xs:string"/>
+      <xs:element minOccurs="0" name="xcapDocDiff" type="xs:string"/>
+      <xs:element minOccurs="0" name="pocOverWifi" type="xs:string"/>
+      <xs:element minOccurs="0" name="httpsSupport" type="xs:string"/>
+      <xs:element minOccurs="0" name="pagingMessageSupport" type="xs:string"/>
+      <xs:element minOccurs="0" name="reloginMessageSupport" type="xs:string"/>
+      <xs:element minOccurs="0" name="talkGrpSelectServer" type="xs:string"/>
+      <xs:element minOccurs="0" name="presenceUpdateReduction" type="xs:string"/>
+      <xs:element minOccurs="0" name="jitterStats" type="xs:string"/>
+      <xs:element minOccurs="0" name="historyBasedPresence" type="xs:string"/>
+      <xs:element minOccurs="0" name="decouplePresenceAndCall" type="xs:string"/>
+      <xs:element minOccurs="0" name="periodicClientLogsAndReport" type="xs:string"/>
+      <xs:element minOccurs="0" name="onDemandClientLogs" type="xs:string"/>
+      <xs:element minOccurs="0" name="onDemandLocation" type="xs:string"/>
+      <xs:element minOccurs="0" name="talkGrpSelectClient" type="xs:string"/>
+      <xs:element minOccurs="0" name="talkGroupScanningClient" type="xs:string"/>
+      <xs:element minOccurs="0" name="batteryUsageOptimization" type="xs:string"/>
+      <xs:element minOccurs="0" name="broadcastGrpService" type="xs:string"/>
+      <xs:element minOccurs="0" name="xcapCouchbaseClient" type="xs:string"/>
+      <xs:element minOccurs="0" name="pushToText" type="xs:string"/>
+      <xs:element minOccurs="0" name="pushToMultimedia" type="xs:string"/>
+      <xs:element minOccurs="0" name="pushToLocation" type="xs:string"/>
+      <xs:element minOccurs="0" name="urgentMsgOrig" type="xs:string"/>
+      <xs:element minOccurs="0" name="grpMemLoc" type="xs:string"/>
+      <xs:element minOccurs="0" name="geoFenceFeature" type="xs:string"/>
+      <xs:element minOccurs="0" name="voiceMsgFallback" type="xs:string"/>
+      <xs:element minOccurs="0" name="pttRadioClient" type="xs:string"/>
+      <xs:element minOccurs="0" name="remotePushNotify" type="xs:string"/>
+      <xs:element minOccurs="0" name="gCMPushNotify" type="xs:string"/>
+      <xs:element minOccurs="0" name="clientUIStats" type="xs:string"/>
+      <xs:element minOccurs="0" name="sessionParticipants" type="xs:string"/>
+      <xs:element minOccurs="0" name="mediaReconnect3G" type="xs:string"/>
+      <xs:element minOccurs="0" name="pttRecordingOnClient" type="xs:string"/>
+      <xs:element minOccurs="0" name="multiSimultaneousSession" type="xs:string"/>
+      <xs:element minOccurs="0" name="breadcrumb" type="xs:string"/>
+      <xs:element minOccurs="0" name="instaDRX" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="customInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="customData" type="tns:customData"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="customData">
+    <xs:sequence>
+      <xs:element name="key" type="xs:string"/>
+      <xs:element name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getSysConfig">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+      <xs:element minOccurs="0" name="corpId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getSysConfigResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:sysConfigResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sysConfigResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:statusInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="configInfo" type="tns:configInfo"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="configInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="allowedSubsType" type="xs:long"/>
+      <xs:element minOccurs="0" name="roamingTypes" type="tns:roamingTypes"/>
+      <xs:element minOccurs="0" name="configFeatureSet" type="xs:long"/>
+      <xs:element minOccurs="0" name="corpHierarchy" type="xs:string"/>
+      <xs:element minOccurs="0" name="idmServiceFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="catUrl" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="forceSync">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+      <xs:element minOccurs="0" name="mobileInfo" type="tns:mobileInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="forceSyncResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:statusInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getSubscriberInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+      <xs:element minOccurs="0" name="mobileInfo" type="tns:mobileInfo"/>
+      <xs:element minOccurs="0" name="subscrEntitiesInfo" type="tns:subscrEntitiesInfo "/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="subscrEntitiesInfo ">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="aliasMdn" type="xs:string"/>
+      <xs:element minOccurs="0" name="userId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getSubscriberInfoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:subsInfoResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="subsInfoResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:statusInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="subsProvisionInfo" type="tns:subsProvisionInfo"/>
+          <xs:element minOccurs="0" name="serverConfigInfo" type="tns:serverConfigInfo"/>
+          <xs:element minOccurs="0" name="subStatusInfo" type="tns:subStatusInfo"/>
+          <xs:element minOccurs="0" name="subsAddlInfo" type="tns:subsAddlInfo"/>
+          <xs:element minOccurs="0" name="activeFSInfo" type="tns:featureBitInfoList"/>
+          <xs:element minOccurs="0" name="customInfo" type="tns:customInfo"/>
+          <xs:element minOccurs="0" name="clientFSInfo" type="tns:featureBitInfoList"/>
+          <xs:element minOccurs="0" name="corpAdminFSInfo" type="tns:featureBitInfoList"/>
+          <xs:element minOccurs="0" name="packageInfo" type="tns:knPackageInfo"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="featureBitInfoList">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="featureSetInfo" type="tns:featureBits"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateAutoPairing">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+      <xs:element minOccurs="0" name="corpInfo" type="tns:corpInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="corpInfo">
+    <xs:sequence>
+      <xs:element name="accountId" type="xs:string"/>
+      <xs:element name="autoPairing" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateAutoPairingResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:statusInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteSubscriber">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+      <xs:element minOccurs="0" name="mobileInfo" type="tns:mobileInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteSubscriberResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:statusInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateSubscriber">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+      <xs:element minOccurs="0" name="subsProvisionInfo" type="tns:subsProvisionInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateSubscriberResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:statusInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="changeServiceAuthStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+      <xs:element minOccurs="0" name="mobileInfo" type="tns:mobileInfo"/>
+      <xs:element minOccurs="0" name="userServiceAuthStatus" type="tns:userServiceAuthStatus"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="userServiceAuthStatus">
+    <xs:sequence>
+      <xs:element name="poCServiceAuthStatus" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="changeServiceAuthStatusResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:statusInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="initialize">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="initializeResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="changeMdn">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+      <xs:element minOccurs="0" name="oldMobileInfo" type="tns:mobileInfo"/>
+      <xs:element minOccurs="0" name="newMobileInfo" type="tns:mobileInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="changeMdnResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:statusInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createSubscriber">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="tns:authInfo"/>
+      <xs:element minOccurs="0" name="subsProvisionInfo" type="tns:subsProvisionInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createSubscriberResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="result" type="tns:statusInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="csrUserDetails">
+    <xs:complexContent>
+      <xs:extension base="tns:statusInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="userName" type="xs:string"/>
+          <xs:element minOccurs="0" name="roleId" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="operationInfo" type="tns:operationInfo"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="operationInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="operationId" type="xs:string"/>
+      <xs:element minOccurs="0" name="operationName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="transactionInfo" nillable="true" type="tns:transactionInfo"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="changeServiceAuthStatusResponse">
+    <wsdl:part element="tns:changeServiceAuthStatusResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteExternalSubscriber">
+    <wsdl:part element="tns:deleteExternalSubscriber" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSubscriberDetails">
+    <wsdl:part element="tns:getSubscriberDetails" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSysConfig">
+    <wsdl:part element="tns:getSysConfig" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSysConfigResponse">
+    <wsdl:part element="tns:getSysConfigResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSubscriberInfo">
+    <wsdl:part element="tns:getSubscriberInfo" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteSubscriber">
+    <wsdl:part element="tns:deleteSubscriber" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateSubscriber">
+    <wsdl:part element="tns:updateSubscriber" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeMdn">
+    <wsdl:part element="tns:changeMdn" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSubscriberDetailsResponse">
+    <wsdl:part element="tns:getSubscriberDetailsResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createSubscriber">
+    <wsdl:part element="tns:createSubscriber" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteExternalSubscriberResponse">
+    <wsdl:part element="tns:deleteExternalSubscriberResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="forceSyncResponse">
+    <wsdl:part element="tns:forceSyncResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isAliveResponse">
+    <wsdl:part element="tns:isAliveResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeMdnResponse">
+    <wsdl:part element="tns:changeMdnResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isAlive">
+    <wsdl:part element="tns:isAlive" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="initializeResponse">
+    <wsdl:part element="tns:initializeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createSubscriberResponse">
+    <wsdl:part element="tns:createSubscriberResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="forceSync">
+    <wsdl:part element="tns:forceSync" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateAutoPairing">
+    <wsdl:part element="tns:updateAutoPairing" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteSubscriberResponse">
+    <wsdl:part element="tns:deleteSubscriberResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateAutoPairingResponse">
+    <wsdl:part element="tns:updateAutoPairingResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateSubscriberResponse">
+    <wsdl:part element="tns:updateSubscriberResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeServiceAuthStatus">
+    <wsdl:part element="tns:changeServiceAuthStatus" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="initialize">
+    <wsdl:part element="tns:initialize" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSubscriberInfoResponse">
+    <wsdl:part element="tns:getSubscriberInfoResponse" name="result">
+    </wsdl:part>
+    <wsdl:part element="tns:transactionInfo" name="transactionInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="KnSubsProvInbound">
+    <wsdl:operation name="deleteExternalSubscriber">
+      <wsdl:input message="tns:deleteExternalSubscriber" name="deleteExternalSubscriber">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteExternalSubscriberResponse" name="deleteExternalSubscriberResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isAlive">
+      <wsdl:input message="tns:isAlive" name="isAlive">
+    </wsdl:input>
+      <wsdl:output message="tns:isAliveResponse" name="isAliveResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSubscriberDetails">
+      <wsdl:input message="tns:getSubscriberDetails" name="getSubscriberDetails">
+    </wsdl:input>
+      <wsdl:output message="tns:getSubscriberDetailsResponse" name="getSubscriberDetailsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSysConfig">
+      <wsdl:input message="tns:getSysConfig" name="getSysConfig">
+    </wsdl:input>
+      <wsdl:output message="tns:getSysConfigResponse" name="getSysConfigResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="forceSync">
+      <wsdl:input message="tns:forceSync" name="forceSync">
+    </wsdl:input>
+      <wsdl:output message="tns:forceSyncResponse" name="forceSyncResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSubscriberInfo">
+      <wsdl:input message="tns:getSubscriberInfo" name="getSubscriberInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:getSubscriberInfoResponse" name="getSubscriberInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateAutoPairing">
+      <wsdl:input message="tns:updateAutoPairing" name="updateAutoPairing">
+    </wsdl:input>
+      <wsdl:output message="tns:updateAutoPairingResponse" name="updateAutoPairingResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteSubscriber">
+      <wsdl:input message="tns:deleteSubscriber" name="deleteSubscriber">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteSubscriberResponse" name="deleteSubscriberResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateSubscriber">
+      <wsdl:input message="tns:updateSubscriber" name="updateSubscriber">
+    </wsdl:input>
+      <wsdl:output message="tns:updateSubscriberResponse" name="updateSubscriberResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeServiceAuthStatus">
+      <wsdl:input message="tns:changeServiceAuthStatus" name="changeServiceAuthStatus">
+    </wsdl:input>
+      <wsdl:output message="tns:changeServiceAuthStatusResponse" name="changeServiceAuthStatusResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="initialize">
+      <wsdl:input message="tns:initialize" name="initialize">
+    </wsdl:input>
+      <wsdl:output message="tns:initializeResponse" name="initializeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeMdn">
+      <wsdl:input message="tns:changeMdn" name="changeMdn">
+    </wsdl:input>
+      <wsdl:output message="tns:changeMdnResponse" name="changeMdnResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createSubscriber">
+      <wsdl:input message="tns:createSubscriber" name="createSubscriber">
+    </wsdl:input>
+      <wsdl:output message="tns:createSubscriberResponse" name="createSubscriberResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InboundPocProvSoapBinding" type="tns:KnSubsProvInbound">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="deleteExternalSubscriber">
+      <soap:operation soapAction="deleteExternalSubscriber" style="document"/>
+      <wsdl:input name="deleteExternalSubscriber">
+        <soap:header message="tns:deleteExternalSubscriber" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteExternalSubscriberResponse">
+        <soap:header message="tns:deleteExternalSubscriberResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isAlive">
+      <soap:operation soapAction="isAlive" style="document"/>
+      <wsdl:input name="isAlive">
+        <soap:header message="tns:isAlive" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="isAliveResponse">
+        <soap:header message="tns:isAliveResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSubscriberDetails">
+      <soap:operation soapAction="getSubscriberDetails" style="document"/>
+      <wsdl:input name="getSubscriberDetails">
+        <soap:header message="tns:getSubscriberDetails" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSubscriberDetailsResponse">
+        <soap:header message="tns:getSubscriberDetailsResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSysConfig">
+      <soap:operation soapAction="getSysConfig" style="document"/>
+      <wsdl:input name="getSysConfig">
+        <soap:header message="tns:getSysConfig" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSysConfigResponse">
+        <soap:header message="tns:getSysConfigResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="forceSync">
+      <soap:operation soapAction="forceSync" style="document"/>
+      <wsdl:input name="forceSync">
+        <soap:header message="tns:forceSync" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="forceSyncResponse">
+        <soap:header message="tns:forceSyncResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSubscriberInfo">
+      <soap:operation soapAction="getSubscriberInfo" style="document"/>
+      <wsdl:input name="getSubscriberInfo">
+        <soap:header message="tns:getSubscriberInfo" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSubscriberInfoResponse">
+        <soap:header message="tns:getSubscriberInfoResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateAutoPairing">
+      <soap:operation soapAction="updateAutoPairing" style="document"/>
+      <wsdl:input name="updateAutoPairing">
+        <soap:header message="tns:updateAutoPairing" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateAutoPairingResponse">
+        <soap:header message="tns:updateAutoPairingResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteSubscriber">
+      <soap:operation soapAction="deleteSubscriber" style="document"/>
+      <wsdl:input name="deleteSubscriber">
+        <soap:header message="tns:deleteSubscriber" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteSubscriberResponse">
+        <soap:header message="tns:deleteSubscriberResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateSubscriber">
+      <soap:operation soapAction="updateSubscriber" style="document"/>
+      <wsdl:input name="updateSubscriber">
+        <soap:header message="tns:updateSubscriber" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateSubscriberResponse">
+        <soap:header message="tns:updateSubscriberResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeServiceAuthStatus">
+      <soap:operation soapAction="changeServiceAuthStatus" style="document"/>
+      <wsdl:input name="changeServiceAuthStatus">
+        <soap:header message="tns:changeServiceAuthStatus" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeServiceAuthStatusResponse">
+        <soap:header message="tns:changeServiceAuthStatusResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="initialize">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="initialize">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="initializeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeMdn">
+      <soap:operation soapAction="changeMdn" style="document"/>
+      <wsdl:input name="changeMdn">
+        <soap:header message="tns:changeMdn" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeMdnResponse">
+        <soap:header message="tns:changeMdnResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createSubscriber">
+      <soap:operation soapAction="createSubscriber" style="document"/>
+      <wsdl:input name="createSubscriber">
+        <soap:header message="tns:createSubscriber" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createSubscriberResponse">
+        <soap:header message="tns:createSubscriberResponse" part="transactionInfo" use="literal">
+        </soap:header>
+        <soap:body parts="result" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InboundPocProv">
+    <wsdl:port binding="tns:InboundPocProvSoapBinding" name="Port">
+      <soap:address location="http://172.27.9.7:8686/services/InboundPocProv"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
