@@ -9,6 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties({
 		FileStorageProperties.class
 })
+// @EnableConfigurationProperties Is for enabling support of @ConfigurationProperties
+//@EnableConfigurationProperties tells Spring to treat this class as a consumer of application.yml/properties values
 public class FileDemoApplication {
 
 	public static void main(String[] args) {
