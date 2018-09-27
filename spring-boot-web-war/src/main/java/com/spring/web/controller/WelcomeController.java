@@ -44,5 +44,16 @@ public class WelcomeController {
 		
 		//return model;
 	}
+	
+	@RequestMapping("/staticre")
+	public void staticResource(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/welcome.html");
+		logger.info("staticResource");
+		///WEB-INF/classes/static
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/view/welcome.html");
+        dispatcher.forward(request, response);
+		//return model;
+	}
 
 }
