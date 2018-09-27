@@ -26,8 +26,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 			@Override
 			public void addViewControllers(ViewControllerRegistry registry) {
-				registry.addViewController("/").setViewName("csrkodiak");
-				registry.addViewController("/csrkodiak").setViewName("csrkodiak");
+				registry.addViewController("/").setViewName("contextPAth");
+				registry.addViewController("/uripath").setViewName("rqMap");
 			}
 		};
 	}*/
