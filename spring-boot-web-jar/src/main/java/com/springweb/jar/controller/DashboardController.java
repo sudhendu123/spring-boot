@@ -13,11 +13,18 @@ import com.springweb.jar.model.User;
 @Controller
 public class DashboardController {
 
+	@RequestMapping(value = "/testapp", method = RequestMethod.GET)
+	public ModelAndView testApp() {
+		ModelAndView model = new ModelAndView();
+    	model.setViewName("welcome.html");
+		return model;
+		
+	}
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public ModelAndView dashboard() {
     	ModelAndView model = new ModelAndView();
     	model.addObject("users", getUsers());
-    	model.setViewName("dashboard");
+    	model.setViewName("dashboard.jsp");
     	return model;
     }
 
