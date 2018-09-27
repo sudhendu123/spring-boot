@@ -23,12 +23,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/dash").setViewName("dashboard");
 	}
 
-    @Bean
+    /*@Bean
     public InternalResourceViewResolver setupViewResolver()  {
         InternalResourceViewResolver resolver =  new InternalResourceViewResolver();
         resolver.setPrefix ("/view/");
         resolver.setSuffix ("");
         //resolver.setViewClass (JstlView.class);
         return resolver;
-    }
+    }*/
 }
