@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.annotation.ReqHeaderAnno;
 import com.example.dto.Users;
 import com.example.exception.PhoneNotFoundException;
 import com.example.repo.UserRepo;
@@ -95,8 +97,9 @@ public class RestControllers {
 		return user;
 	}
 	
+	@ReqHeaderAnno(value = "#httpRequest.getHeader(\"Content-Type\")")
 	@RequestMapping(value = "/fetch",method=GET)
-	public List<Users> getAllUsers() {
+	public List<Users> getAllUsers(HttpServletRequest httpRequest) {
 		logger.debug("getAllUsers debug");
 		List<Users> user = userRepo.findAll();
 		logger.info ("getAllUsers info");
