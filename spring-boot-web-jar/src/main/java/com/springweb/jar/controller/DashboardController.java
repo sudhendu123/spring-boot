@@ -3,9 +3,14 @@ package com.springweb.jar.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springweb.jar.model.User;
@@ -14,11 +19,27 @@ import com.springweb.jar.model.User;
 public class DashboardController {
 
 	@RequestMapping(value = "/testapp", method = RequestMethod.GET)
-	public ModelAndView testApp() {
+	public ModelAndView testApp(HttpServletRequest req,HttpServletResponse resp ) {
+		String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
+		
+		req.getSession(true);
+		String sessionId1 = RequestContextHolder.currentRequestAttributes().getSessionId();
+		System.out.println(sessionId +":"+sessionId1);
+		if ((!req.isRequestedSessionIdValid()) && (req.getRequestedSessionId() != null)) {
+		      HttpSession s = req.getSession(false);
+		      if (s != null) {
+		           s.invalidate();
+		      }}
 		ModelAndView model = new ModelAndView();
     	model.setViewName("welcome.html");
 		return model;
 		
+	}
+	
+	@RequestMapping(value = "/corsTest", method = RequestMethod.GET)
+	public ModelAndView corsTest(HttpServletRequest req,HttpServletResponse resp ) {
+		
+		return new ModelAndView("corsTestView.html");
 	}
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public ModelAndView dashboard() {

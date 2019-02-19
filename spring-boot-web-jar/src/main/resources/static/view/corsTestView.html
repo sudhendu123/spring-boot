@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spring Boot - CORS</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- <script src="corsTest.js"> </script> -->
+        <script type="application/javascript">
+        
+        $(document).ready(function() {
+        	$.ajax({
+        		//url: "http://localhost:8080/data"
+        		url: "http://localhost:8585/ApplicationResources_en_US.json"
+        	}).then(function(data) {
+        	  var items = [];
+        	  $.each( data, function( key, val ) {
+        		  
+        		//items.push("Id: "+page.title +", Name: "+label.username+"<br/>");
+        		items.push("val: "+val);
+        	  });
+                  $('.result').append(items);
+        	});
+        }); 
+        </Script>
+    </head>
+    <body>
+        <div>
+            <div class="result"></div>
+        </div>
+    </body>
+</html>  
