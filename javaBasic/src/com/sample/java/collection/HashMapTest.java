@@ -3,6 +3,7 @@ package com.sample.java.collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class HashMapTest {
@@ -19,14 +20,17 @@ public class HashMapTest {
 		hmap.put(3, "Anuj");
 
 		/* Display content using Iterator */
-		Set set = hmap.entrySet();
-		Iterator iterator = set.iterator();
+		Set<?> set = hmap.entrySet();
+		Iterator<?> iterator = set.iterator();
 		while (iterator.hasNext()) {
 			Map.Entry mentry = (Map.Entry) iterator.next();
 			System.out.print("key is: " + mentry.getKey() + " & Value is: ");
 			System.out.println(mentry.getValue());
 		}
 
+		for(Entry<Integer, String> ent:hmap.entrySet()) {
+			System.out.println("entry set-->"+ent.getValue()+":"+ent.getKey());
+		}
 		/* Get values based on key */
 		String var = hmap.get(2);
 		System.out.println("Value at index 2 is: " + var);
