@@ -1,5 +1,7 @@
 package com.example.dto;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Address {
@@ -7,6 +9,7 @@ public class Address {
 	@JsonProperty(value = "pin")
 	private int pin;
 	@JsonProperty(value = "loc")
+	@NotNull(message = "location is required")
 	private String location;
 
 	public int getPin() {

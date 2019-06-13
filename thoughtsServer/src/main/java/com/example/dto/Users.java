@@ -17,6 +17,7 @@ public class Users {
 	@ApiModelProperty( value = "Users Id", required = true ,notes="UserId is max 2 digit integer." ) 
 	@Digits(message="wrong id length", fraction = 2, integer = 2)
 	@JsonProperty(value ="id", required = true)
+	@NotNull(message = "userId is required")
 	private int userId;
 	@JsonProperty(value ="phone")
 	private int phone;

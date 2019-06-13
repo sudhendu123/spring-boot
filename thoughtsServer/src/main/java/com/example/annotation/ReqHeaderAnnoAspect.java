@@ -18,9 +18,9 @@ import org.springframework.stereotype.Component;
 
 
 
-@Aspect
+/*@Aspect
 @Order(1)
-@Component
+@Component*/
 public class ReqHeaderAnnoAspect {
 
 	private ExpressionParser parser = new SpelExpressionParser();
