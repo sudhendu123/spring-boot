@@ -12,17 +12,19 @@ import org.springframework.stereotype.Repository;
 import com.example.dto.Users;
 
 @Repository
-public class UserRepo {
+public class UserDAOImpl implements UserDAO{
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
 	private final String batchSql="insert into Use (id, phone,name,pin,location) " + "values(?,?, ?,?,?)";
 
+	@Override
 	public List<Users> findAll() {
 		return jdbcTemplate.query("select * from Use", new UserRowMapper());
 	}
 
+	@Override
 	public Users findById(long id) {
 		/*
 		 * return jdbcTemplate.queryForObject("select * from Use where id=?", new
@@ -31,21 +33,25 @@ public class UserRepo {
 		return jdbcTemplate.queryForObject("select * from Use where id=?", new Object[] { id }, new UserRowMapper());
 	}
 
+	@Override
 	public int deleteById(long id) {
 		return jdbcTemplate.update("delete from Use where id=?", new Object[] { id });
 	}
 
+	@Override
 	public int insert(Users User) {
 		return jdbcTemplate.update("insert into Use (id, phone,name,pin,location) " + "values(?,?, ?,?,?)",
 				new Object[] { User.getUserId(), User.getPhone(), User.getUserName(), User.getAddress().getPin(),
 						User.getAddress().getLocation() });
 	}
 
+	@Override
 	public int update(Users User) {
 		return jdbcTemplate.update("update Use " + " set name = ?, location = ? " + " where id = ?",
 				new Object[] { User.getUserName(), User.getAddress().getLocation(), User.getUserId() });
 	}
 
+	@Override
 	public int[] batchCreate(List<Users> usersList) {
 		return jdbcTemplate.batchUpdate(batchSql, new BatchPreparedStatementSetter() {
 
