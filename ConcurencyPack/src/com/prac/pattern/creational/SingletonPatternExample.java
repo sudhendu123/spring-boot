@@ -2,18 +2,13 @@ package com.prac.pattern.creational;
 
 //Lazily Initialized Inner Class Singleton (Bill Pugh singleton)
 public class SingletonPatternExample {
-
-	private SingletonPatternExample() {}
 	
-	// Inner class to provide instance of class 
-	  private static class BillPughSingleton 
-	  { 
-		  private static final SingletonPatternExample single=new SingletonPatternExample();
-	  }
-	  
-	  public static SingletonPatternExample getInstance() {
-		  return BillPughSingleton.single;
-	  }
+	public static void main(String[] args) {
+		BillPughSingletonClass singleton = BillPughSingletonClass.getInstance();
+		singleton.utilMetod(20);
+	}
+
+	
 }
 
 /**
@@ -22,3 +17,21 @@ public class SingletonPatternExample {
  *  require any synchronization. It is the most efficient approach among all
  *   the singleton design pattern implementations.
  */ 
+
+class BillPughSingletonClass{
+private BillPughSingletonClass() {}
+	int a=10;
+	// Inner class to provide instance of class 
+	  private static class BillPughSingleton 
+	  { 
+		  private static final BillPughSingletonClass single=new BillPughSingletonClass();
+	  }
+	  
+	  public static BillPughSingletonClass getInstance() {
+		  return BillPughSingleton.single;
+	  }
+	  
+	  protected void utilMetod(int a) {
+		  System.out.println("a: "+a);
+	  }
+}

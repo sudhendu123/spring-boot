@@ -3,7 +3,13 @@ package com.prac.pattern.creational;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+/**
+ * 
+ * @author sudhendu.kumar
+ *The Factory Method Pattern is also known as Virtual Constructor.
+ *Factory Method Pattern says that just define an interface
+ * or abstract class for creating an object but let the subclasses decide which class to instantiate.
+ */
 public class FactoryMethodPattern {
 
     public static void main(String args[])throws IOException {
