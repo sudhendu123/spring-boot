@@ -26,7 +26,7 @@ public class UtilServiceAnsImpl implements UtilService{
 	
 	@Override
 	public String getAns() {
-		logger.info("getAns");
+		logger.info("UtilServiceAnsImpl , getAns");
 		return stringVar+"UtilServiceAnsImpl"+intVar;
 	}
 
@@ -50,5 +50,11 @@ public class UtilServiceAnsImpl implements UtilService{
 
 	public void setIntVar(int intVar) {
 		this.intVar = intVar;
+	}
+
+	@Override
+	public int add(int a, int b) {
+		logger.info("UtilServiceAnsImpl , add");
+		return a+a+a;
 	}
 }

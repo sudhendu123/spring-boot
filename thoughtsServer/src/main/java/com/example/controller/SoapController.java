@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.example.dto.Users;
-import com.example.repo.UserRepo;
+import com.example.repo.UserDAOImpl;
 
 @Component
 @WebService(serviceName = "GoodSoap", targetNamespace = "/GoodSoap_V1.0", portName = "Port")
@@ -23,7 +23,7 @@ public class SoapController {
 	private static final Logger logger = LogManager.getLogger(SoapController.class);
 	
 	@Autowired
-	private UserRepo userRepo;
+	private UserDAOImpl userRepo;
 	
 	@WebMethod(action = "createUser")
 	@WebResult(name = "result")

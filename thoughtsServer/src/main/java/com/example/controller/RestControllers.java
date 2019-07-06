@@ -31,7 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.annotation.ReqHeaderAnno;
 import com.example.dto.Users;
 import com.example.exception.PhoneNotFoundException;
-import com.example.repo.UserRepo;
+import com.example.service.UserService;
 import com.example.service.UtilService;
 
 import io.swagger.annotations.ApiOperation;
@@ -50,7 +50,7 @@ public class RestControllers {
 	UtilService utilService;
 	
 	@Autowired
-	private UserRepo userRepo;
+	UserService userService;
 	
 	@Value("${UtilServiceImplBean.stringVar}")
 	public String elString;
@@ -67,7 +67,7 @@ public class RestControllers {
 		if(user.getPhone()<1) {
 			throw new PhoneNotFoundException("phone mandatory");
 		}
-		userRepo.insert(user);
+		userService.insert(user);
 		return new ResponseEntity<Users>(user,HttpStatus.CREATED);
 	}
 	
@@ -81,7 +81,7 @@ public class RestControllers {
 			@ApiParam(value = "This is the user resource.")
 			@Valid @RequestBody List<Users> user) {
 		
-		userRepo.batchCreate(user);
+		userService.batchCreate(user);
 		return new ResponseEntity<List<Users>>(user,HttpStatus.CREATED);
 	}
 	
@@ -91,9 +91,9 @@ public class RestControllers {
 		
 		logger.info(utilService.getAns());
 		logger.info("elString :"+elString);
-		
-		Users user = userRepo.findById(id);
-		logger.info ("getByUserId info");
+		logger.info("add : "+utilService.add(1, 2));
+		Users user = userService.getUserById(id);
+		logger.info ("getByUserId info",user);
 		return user;
 	}
 	
@@ -101,21 +101,21 @@ public class RestControllers {
 	@RequestMapping(value = "/fetch",method=GET)
 	public List<Users> getAllUsers(HttpServletRequest httpRequest) {
 		logger.debug("getAllUsers debug");
-		List<Users> user = userRepo.findAll();
+		List<Users> user = userService.findAll();
 		logger.info ("getAllUsers info");
 		return user;
 	}
 	
 	@RequestMapping(value="/delete/{id}",method=DELETE)
 	public ResponseEntity<Users> deleteUser(@PathVariable long id) {
-		userRepo.deleteById(id);
+		userService.deleteById(id);
 		
 		return new ResponseEntity<Users>(HttpStatus.NO_CONTENT);
 	}
 	
 	@RequestMapping(value="/update",method=PUT)
 	public ResponseEntity<Users> updateUser(@RequestBody Users user) {
-		userRepo.update(user);
+		userService.update(user);
 		
 		return new ResponseEntity<Users>(user,HttpStatus.OK);
 	}

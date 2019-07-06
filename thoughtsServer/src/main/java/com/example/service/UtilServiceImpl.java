@@ -25,11 +25,17 @@ public class UtilServiceImpl implements UtilService {
 	
 	@Override
 	public String getAns() {
-		logger.info("getAns");
+		logger.info("UtilServiceImpl, getAns");
 		return stringVar+"UtilServiceImpl"+intVar;
 	}
 	@Override
 	public String getQuestion() {
 		return null;
+	}
+
+	@Override
+	public int add(int a, int b) {
+		logger.info("UtilServiceImpl, add");
+		return b+b+b;
 	}
 }
