@@ -1,5 +1,11 @@
 package com.sample.java.ds.search;
-
+/**
+ * This search is better than liner but not better than binary
+ * 
+ * time complexcity=O(n/m+(m-1))
+ * @author sudhendu.kumar
+ *
+ */
 public class JumpSearch {
 
 	public static void main(String[] args) {

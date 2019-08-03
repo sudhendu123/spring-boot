@@ -4,6 +4,13 @@ import java.util.Scanner;
 
 public class InterpolationSearch
 {
+	/* Pre-condition 
+	 * Array should be sorted
+	 * Array should be uniformly distributed like 1,2,3 gap is 2-1=1,3-2=1
+	 * 1,3,5,7 3-1=2,5-3=2, so that it will take less step to find the element.
+	 * 
+	 * */
+	
     /** interpolationSearch function **/
     public static int interpolationSearch(int[] sortedArray, int toFind)
     {
