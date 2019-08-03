@@ -18,7 +18,7 @@ public class FutureTaskExample {
 
 		FutureTask<String> futureTask1 = new FutureTask<String>(callable1);
 		FutureTask<String> futureTask2 = new FutureTask<String>(callable2);
-
+		//2 task we are executing so no of thread is 2.
 		ExecutorService executor = Executors.newFixedThreadPool(2);
 		executor.execute(futureTask1);
 		executor.execute(futureTask2);

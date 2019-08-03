@@ -3,7 +3,7 @@ package com.prac.java.util.concurency.synchonized;
 public class SynchronizedMethod {
 
 	public static void main(String[] args) {
-		SynchronizedMethod s=new SynchronizedMethod();
+		SyncMethod s=new SyncMethod();
 		Thread t=new Thread() {
 			public void run() {
 				//SynchronizedMethod s=new SynchronizedMethod();
@@ -23,11 +23,22 @@ public class SynchronizedMethod {
 		t1.setName("t1");
 	}
 	
+	
+	
+}
+//Synchronization
+//1.This guarantees that the access to a shared variable is Atomic, and multiple threads do not interfere.
+//2.This guarantees that changes done by one thread are visible to others.
+//Java’s synchronized keyword guarantees both mutual exclusion and visibility. 
+/** 
+Mutual Exclusion: It means that only one thread or process can execute a block of code (critical section) at a time.
+Visibility: It means that changes made by one thread to shared data are visible to other threads.
+ * */
+class SyncMethod{
 	public synchronized  void add(int a,int b) {
 		a=a+b;
 		System.out.println(a+":"+Thread.currentThread().getName());
 		b=b+a;
 		System.out.println(b+":"+Thread.currentThread().getName());
 	}
-	
 }
