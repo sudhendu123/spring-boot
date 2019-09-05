@@ -16,6 +16,8 @@ import javax.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,7 +43,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(value = "/User")
-public class RestControllers {
+public class RestControllers implements InitializingBean, DisposableBean{
 
 	private static final Logger logger = LogManager.getLogger(RestControllers.class);
 	
@@ -138,5 +140,15 @@ public class RestControllers {
 		//logger.info("user info "+user);
 		return "ok";
 		
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		logger.info(" destroy() :");
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		logger.info(" afterPropertiesSet() ");
 	}
 }
