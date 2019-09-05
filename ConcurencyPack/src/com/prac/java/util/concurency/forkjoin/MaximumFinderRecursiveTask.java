@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
-public class MaximumFinderFork extends RecursiveTask<Integer> {
+public class MaximumFinderRecursiveTask extends RecursiveTask<Integer> {
 
 	  /**
 	 * 
@@ -17,13 +17,13 @@ public class MaximumFinderFork extends RecursiveTask<Integer> {
 	  private final int start;
 	  private final int end;
 
-	  public MaximumFinderFork(int[] data, int start, int end) {
+	  public MaximumFinderRecursiveTask(int[] data, int start, int end) {
 	    this.data = data;
 	    this.start = start;
 	    this.end = end;
 	  }
 
-	  public MaximumFinderFork(int[] data) {
+	  public MaximumFinderRecursiveTask(int[] data) {
 	    this(data, 0, data.length);
 	  }
 
@@ -34,9 +34,9 @@ public class MaximumFinderFork extends RecursiveTask<Integer> {
 	      return computeDirectly();
 	    }
 	    final int split = length / 2;
-	    final MaximumFinderFork left = new MaximumFinderFork(data, start, start + split);
+	    final MaximumFinderRecursiveTask left = new MaximumFinderRecursiveTask(data, start, start + split);
 	    left.fork();
-	    final MaximumFinderFork right = new MaximumFinderFork(data, start + split, end);
+	    final MaximumFinderRecursiveTask right = new MaximumFinderRecursiveTask(data, start + split, end);
 	    return Math.max(right.compute(), left.join());
 	  }
 
@@ -62,7 +62,7 @@ public class MaximumFinderFork extends RecursiveTask<Integer> {
 
 	    // submit the task to the pool
 	    final ForkJoinPool pool = new ForkJoinPool(4);
-	    final MaximumFinderFork finder = new MaximumFinderFork(data);
+	    final MaximumFinderRecursiveTask finder = new MaximumFinderRecursiveTask(data);
 	    System.out.println(pool.invoke(finder));
 	  }
 	}

@@ -14,19 +14,19 @@ public class ExecutorInvokeAll {
 		
 		ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-		Set<Callable<String>> callables = new HashSet<Callable<String>>();
+		Set<Callable<String>> callablesTaskSet = new HashSet<Callable<String>>();
 
-		callables.add(new Callable<String>() {
+		callablesTaskSet.add(new Callable<String>() {
 		    public String call() throws Exception {
 		        return "Task 1";
 		    }
 		});
-		callables.add(new Callable<String>() {
+		callablesTaskSet.add(new Callable<String>() {
 		    public String call() throws Exception {
 		        return "Task 2";
 		    }
 		});
-		callables.add(new Callable<String>() {
+		callablesTaskSet.add(new Callable<String>() {
 		    public String call() throws Exception {
 		        return "Task 3";
 		    }
@@ -34,9 +34,8 @@ public class ExecutorInvokeAll {
 
 		List<Future<String>> futures = null;
 		try {
-			futures = executorService.invokeAll(callables);
+			futures = executorService.invokeAll(callablesTaskSet);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

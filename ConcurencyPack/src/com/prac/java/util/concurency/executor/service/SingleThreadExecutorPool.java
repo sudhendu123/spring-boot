@@ -18,7 +18,7 @@ public class SingleThreadExecutorPool {
         System.out.println("Callable:" + callval);
         // checks for thread termination
         final boolean isTerminated = exService.isTerminated();
-        System.out.println(isTerminated);
+        System.out.println("isTerminated : "+isTerminated);
         // waits for termination for 30 seconds only
         exService.awaitTermination(30, TimeUnit.SECONDS);
         exService.shutdownNow();

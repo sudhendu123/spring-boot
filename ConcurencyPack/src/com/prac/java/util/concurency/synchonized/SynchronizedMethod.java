@@ -37,8 +37,8 @@ Visibility: It means that changes made by one thread to shared data are visible 
 class SyncMethod{
 	public synchronized  void add(int a,int b) {
 		a=a+b;
-		System.out.println(a+":"+Thread.currentThread().getName());
+		System.out.println("a = "+a+":"+Thread.currentThread().getName());
 		b=b+a;
-		System.out.println(b+":"+Thread.currentThread().getName());
+		System.out.println("b= "+b+":"+Thread.currentThread().getName());
 	}
 }

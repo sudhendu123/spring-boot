@@ -41,8 +41,8 @@ You can use volatile keyword to avoid memory consistency errors and read is alwa
 class WithOutSyncMethod{
 	public void add(int a,int b) {
 		a=a+b;
-		System.out.println(a+":"+Thread.currentThread().getName());
+		System.out.println("a= "+a+":"+Thread.currentThread().getName());
 		b=b+a;
-		System.out.println(b+":"+Thread.currentThread().getName());
+		System.out.println("b ="+b+":"+Thread.currentThread().getName());
 	}
 }
