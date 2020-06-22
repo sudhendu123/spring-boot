@@ -40,6 +40,28 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+	
+	<!-- 
+	<dependency>
+		<groupId>org.jsoup</groupId>
+		<artifactId>jsoup</artifactId>
+		<version>1.7.2</version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/extLib/jsoup-1.7.2.jar</systemPath>
+	</dependency> -->
+	
+	<dependency>
+            <groupId>com.jackson.test</groupId>
+			<artifactId>jackson-core1</artifactId>
+			<version>2.11.0</version>
+    </dependency>
+	<dependency>
+            <groupId>org.jsoup.test</groupId>
+            <artifactId>jsoup1</artifactId>
+			<version>1.7.2</version>
+    </dependency>
+
+	
 
     </dependencies>
 
@@ -60,4 +82,14 @@
         </plugins>
 
     </build>
+	
+	<!-- local repo uri -->
+	<repositories>
+	<repository>
+    <id>maven-local-repository</id>
+    <name>maven-local-repository</name>
+    <url>file://${project.basedir}/extLib</url>
+</repository>
+
+</repositories>
 </project>
