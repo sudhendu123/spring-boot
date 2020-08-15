@@ -17,8 +17,8 @@ import com.example.dto.Users;
 import com.example.repo.UserDAOImpl;
 
 @Component
-@WebService(serviceName = "GoodSoap", targetNamespace = "/GoodSoap_V1.0", portName = "Port")
-@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
+//@WebService(serviceName = "GoodSoap", targetNamespace = "/GoodSoap_V1.0", portName = "Port")
+//@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public class SoapController {
 	private static final Logger logger = LogManager.getLogger(SoapController.class);
 	
