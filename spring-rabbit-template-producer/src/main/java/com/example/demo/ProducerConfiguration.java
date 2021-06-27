@@ -28,9 +28,9 @@ public class ProducerConfiguration implements SchedulingConfigurer {
 
 	@Bean
 	public ConnectionFactory connectionFactory() {
-		CachingConnectionFactory connectionFactory = new CachingConnectionFactory("{host}");
-		connectionFactory.setUsername("un");
-		connectionFactory.setPassword("pass");
+		CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
+		connectionFactory.setUsername("guest");
+		connectionFactory.setPassword("guest");
 		return connectionFactory;
 	}
 
