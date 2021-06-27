@@ -42,9 +42,9 @@ public class SpringRabbitListnerApplication implements RabbitListenerConfigurer 
 	
 	@Bean
 	public ConnectionFactory connectionFactory() {
-		CachingConnectionFactory connectionFactory = new CachingConnectionFactory("{host}");
-		connectionFactory.setUsername("{UN}");
-		connectionFactory.setPassword("{pass}");
+		CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
+		connectionFactory.setUsername("guest");
+		connectionFactory.setPassword("guest");
 		return connectionFactory;
 	}
 	
